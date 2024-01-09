@@ -1,0 +1,9 @@
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\bin\Debug\CalculadoraGrafica.exe.config
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\bin\Debug\CalculadoraGrafica.exe
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\bin\Debug\CalculadoraGrafica.pdb
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.csproj.AssemblyReference.cache
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.Properties.Resources.resources
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.csproj.GenerateResource.cache
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.csproj.CoreCompileInputs.cache
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.exe
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.pdb
