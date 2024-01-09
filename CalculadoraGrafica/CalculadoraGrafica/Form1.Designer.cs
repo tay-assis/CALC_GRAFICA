@@ -40,12 +40,15 @@
             // 
             // Numero_1
             // 
+            this.Numero_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Numero_1.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Numero_1.ForeColor = System.Drawing.Color.Black;
             this.Numero_1.Location = new System.Drawing.Point(11, 319);
-            this.Numero_1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Numero_1.Margin = new System.Windows.Forms.Padding(5);
             this.Numero_1.Name = "Numero_1";
-            this.Numero_1.Size = new System.Drawing.Size(59, 60);
-            this.Numero_1.TabIndex = 0;
+            this.Numero_1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Numero_1.Size = new System.Drawing.Size(60, 60);
+            this.Numero_1.TabIndex = 1;
             this.Numero_1.TabStop = false;
             this.Numero_1.Text = "1";
             this.Numero_1.UseVisualStyleBackColor = true;

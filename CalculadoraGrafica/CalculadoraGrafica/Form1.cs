@@ -23,8 +23,6 @@ namespace CalculadoraGrafica
         {
             InitializeComponent();
 
-            //Exibir_Num.Text = resultado.ToString("0");
-
         }
 
         // Verifica se a operação foi selecionada
@@ -61,7 +59,7 @@ namespace CalculadoraGrafica
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
             string texto_Botao = botao.Text; // Captura o texto do botão
 
-            if(VerificaOperacao())
+            if (VerificaOperacao())
             {
                 // Se não foi realizada nenhuma operação, os números vão para num1
                 AtualizarExibirNum(texto_Botao); // Atualiza o TextBox com o número digitado
