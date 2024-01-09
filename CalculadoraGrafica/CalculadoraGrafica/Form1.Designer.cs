@@ -36,6 +36,14 @@
             this.Botao_Igual = new System.Windows.Forms.Button();
             this.Numero_3 = new System.Windows.Forms.Button();
             this.Limpar_Tudo = new System.Windows.Forms.Button();
+            this.Numero_4 = new System.Windows.Forms.Button();
+            this.Numero_5 = new System.Windows.Forms.Button();
+            this.Numero_6 = new System.Windows.Forms.Button();
+            this.Numero_7 = new System.Windows.Forms.Button();
+            this.Numero_8 = new System.Windows.Forms.Button();
+            this.Numero_9 = new System.Windows.Forms.Button();
+            this.Numero_0 = new System.Windows.Forms.Button();
+            this.Botao_Ponto = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Numero_1
@@ -70,10 +78,10 @@
             // Botao_Soma
             // 
             this.Botao_Soma.Font = new System.Drawing.Font("Mongolian Baiti", 28.224F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Botao_Soma.Location = new System.Drawing.Point(344, 311);
+            this.Botao_Soma.Location = new System.Drawing.Point(218, 319);
             this.Botao_Soma.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Botao_Soma.Name = "Botao_Soma";
-            this.Botao_Soma.Size = new System.Drawing.Size(75, 127);
+            this.Botao_Soma.Size = new System.Drawing.Size(60, 128);
             this.Botao_Soma.TabIndex = 11;
             this.Botao_Soma.TabStop = false;
             this.Botao_Soma.Text = "+";
@@ -99,7 +107,7 @@
             // Botao_Igual
             // 
             this.Botao_Igual.Font = new System.Drawing.Font("Microsoft Yi Baiti", 36.288F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Botao_Igual.Location = new System.Drawing.Point(277, 380);
+            this.Botao_Igual.Location = new System.Drawing.Point(149, 388);
             this.Botao_Igual.Name = "Botao_Igual";
             this.Botao_Igual.Size = new System.Drawing.Size(59, 59);
             this.Botao_Igual.TabIndex = 16;
@@ -134,11 +142,123 @@
             this.Limpar_Tudo.UseVisualStyleBackColor = true;
             this.Limpar_Tudo.Click += new System.EventHandler(this.Limpar_Tudo_Click);
             // 
+            // Numero_4
+            // 
+            this.Numero_4.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Numero_4.Location = new System.Drawing.Point(11, 250);
+            this.Numero_4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Numero_4.Name = "Numero_4";
+            this.Numero_4.Size = new System.Drawing.Size(59, 60);
+            this.Numero_4.TabIndex = 4;
+            this.Numero_4.TabStop = false;
+            this.Numero_4.Text = "4";
+            this.Numero_4.UseVisualStyleBackColor = true;
+            this.Numero_4.Click += new System.EventHandler(this.Numero_4_Click);
+            // 
+            // Numero_5
+            // 
+            this.Numero_5.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Numero_5.Location = new System.Drawing.Point(81, 251);
+            this.Numero_5.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Numero_5.Name = "Numero_5";
+            this.Numero_5.Size = new System.Drawing.Size(59, 60);
+            this.Numero_5.TabIndex = 5;
+            this.Numero_5.TabStop = false;
+            this.Numero_5.Text = "5";
+            this.Numero_5.UseVisualStyleBackColor = true;
+            this.Numero_5.Click += new System.EventHandler(this.Numero_5_Click);
+            // 
+            // Numero_6
+            // 
+            this.Numero_6.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Numero_6.Location = new System.Drawing.Point(149, 251);
+            this.Numero_6.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Numero_6.Name = "Numero_6";
+            this.Numero_6.Size = new System.Drawing.Size(59, 60);
+            this.Numero_6.TabIndex = 6;
+            this.Numero_6.TabStop = false;
+            this.Numero_6.Text = "6";
+            this.Numero_6.UseVisualStyleBackColor = true;
+            this.Numero_6.Click += new System.EventHandler(this.Numero_6_Click);
+            // 
+            // Numero_7
+            // 
+            this.Numero_7.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Numero_7.Location = new System.Drawing.Point(12, 182);
+            this.Numero_7.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Numero_7.Name = "Numero_7";
+            this.Numero_7.Size = new System.Drawing.Size(59, 60);
+            this.Numero_7.TabIndex = 7;
+            this.Numero_7.TabStop = false;
+            this.Numero_7.Text = "7";
+            this.Numero_7.UseVisualStyleBackColor = true;
+            this.Numero_7.Click += new System.EventHandler(this.Numero_7_Click);
+            // 
+            // Numero_8
+            // 
+            this.Numero_8.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Numero_8.Location = new System.Drawing.Point(81, 182);
+            this.Numero_8.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Numero_8.Name = "Numero_8";
+            this.Numero_8.Size = new System.Drawing.Size(59, 60);
+            this.Numero_8.TabIndex = 8;
+            this.Numero_8.TabStop = false;
+            this.Numero_8.Text = "8";
+            this.Numero_8.UseVisualStyleBackColor = true;
+            this.Numero_8.Click += new System.EventHandler(this.Numero_8_Click);
+            // 
+            // Numero_9
+            // 
+            this.Numero_9.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Numero_9.Location = new System.Drawing.Point(149, 182);
+            this.Numero_9.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Numero_9.Name = "Numero_9";
+            this.Numero_9.Size = new System.Drawing.Size(59, 60);
+            this.Numero_9.TabIndex = 9;
+            this.Numero_9.TabStop = false;
+            this.Numero_9.Text = "9";
+            this.Numero_9.UseVisualStyleBackColor = true;
+            this.Numero_9.Click += new System.EventHandler(this.Numero_9_Click);
+            // 
+            // Numero_0
+            // 
+            this.Numero_0.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Numero_0.Location = new System.Drawing.Point(11, 388);
+            this.Numero_0.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Numero_0.Name = "Numero_0";
+            this.Numero_0.Size = new System.Drawing.Size(59, 60);
+            this.Numero_0.TabIndex = 0;
+            this.Numero_0.TabStop = false;
+            this.Numero_0.Text = "0";
+            this.Numero_0.UseVisualStyleBackColor = true;
+            this.Numero_0.Click += new System.EventHandler(this.Numero_0_Click);
+            // 
+            // Botao_Ponto
+            // 
+            this.Botao_Ponto.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Botao_Ponto.Location = new System.Drawing.Point(80, 388);
+            this.Botao_Ponto.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Botao_Ponto.Name = "Botao_Ponto";
+            this.Botao_Ponto.Size = new System.Drawing.Size(59, 60);
+            this.Botao_Ponto.TabIndex = 15;
+            this.Botao_Ponto.TabStop = false;
+            this.Botao_Ponto.Text = ",";
+            this.Botao_Ponto.UseVisualStyleBackColor = true;
+            this.Botao_Ponto.Click += new System.EventHandler(this.Botao_Ponto_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 452);
+            this.Controls.Add(this.Botao_Ponto);
+            this.Controls.Add(this.Numero_0);
+            this.Controls.Add(this.Numero_9);
+            this.Controls.Add(this.Numero_8);
+            this.Controls.Add(this.Numero_7);
+            this.Controls.Add(this.Numero_6);
+            this.Controls.Add(this.Numero_5);
+            this.Controls.Add(this.Numero_4);
             this.Controls.Add(this.Limpar_Tudo);
             this.Controls.Add(this.Numero_3);
             this.Controls.Add(this.Botao_Igual);
@@ -166,6 +286,14 @@
         private System.Windows.Forms.Button Botao_Igual;
         private System.Windows.Forms.Button Numero_3;
         private System.Windows.Forms.Button Limpar_Tudo;
+        private System.Windows.Forms.Button Numero_4;
+        private System.Windows.Forms.Button Numero_5;
+        private System.Windows.Forms.Button Numero_6;
+        private System.Windows.Forms.Button Numero_7;
+        private System.Windows.Forms.Button Numero_8;
+        private System.Windows.Forms.Button Numero_9;
+        private System.Windows.Forms.Button Numero_0;
+        private System.Windows.Forms.Button Botao_Ponto;
     }
 }
 
