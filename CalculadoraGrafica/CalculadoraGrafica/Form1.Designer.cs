@@ -35,6 +35,7 @@
             this.Exibir_Num = new System.Windows.Forms.TextBox();
             this.Botao_Igual = new System.Windows.Forms.Button();
             this.Numero_3 = new System.Windows.Forms.Button();
+            this.Limpar_Tudo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Numero_1
@@ -108,11 +109,24 @@
             this.Numero_3.UseVisualStyleBackColor = true;
             this.Numero_3.Click += new System.EventHandler(this.Numero_3_Click);
             // 
+            // Limpar_Tudo
+            // 
+            this.Limpar_Tudo.Font = new System.Drawing.Font("Mongolian Baiti", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Limpar_Tudo.Location = new System.Drawing.Point(12, 115);
+            this.Limpar_Tudo.Margin = new System.Windows.Forms.Padding(4);
+            this.Limpar_Tudo.Name = "Limpar_Tudo";
+            this.Limpar_Tudo.Size = new System.Drawing.Size(60, 60);
+            this.Limpar_Tudo.TabIndex = 17;
+            this.Limpar_Tudo.Text = "AC";
+            this.Limpar_Tudo.UseVisualStyleBackColor = true;
+            this.Limpar_Tudo.Click += new System.EventHandler(this.Limpar_Tudo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 452);
+            this.Controls.Add(this.Limpar_Tudo);
             this.Controls.Add(this.Numero_3);
             this.Controls.Add(this.Botao_Igual);
             this.Controls.Add(this.Exibir_Num);
@@ -136,6 +150,7 @@
         private System.Windows.Forms.TextBox Exibir_Num;
         private System.Windows.Forms.Button Botao_Igual;
         private System.Windows.Forms.Button Numero_3;
+        private System.Windows.Forms.Button Limpar_Tudo;
     }
 }
 

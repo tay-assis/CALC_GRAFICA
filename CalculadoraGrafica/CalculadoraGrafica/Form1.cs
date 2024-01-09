@@ -27,6 +27,9 @@ namespace CalculadoraGrafica
             Exibir_Num.ReadOnly = true;
             Exibir_Num.Enabled = false;
             Exibir_Num.Text = resultado.ToString("0");
+
+            // Removendo o foco de qualquer controle ao iniciar o formulário
+            this.ActiveControl = null;
         }
 
         // Verifica se a operação foi selecionada
@@ -43,10 +46,21 @@ namespace CalculadoraGrafica
         private void LimparTextBox()
         {
             Exibir_Num.Clear(); // Limpa o TextBox
-        }   
+        }
+        
+        private void ReiniciarVariáveis()
+        {
+            num1 = 0; // Limpa o valor de num1
+            num2 = 0; // Limpa o valor de num2
+            operador = ""; // Limpa o valor de operador
+            resultado = 0; // Limpa o valor de resultado
+            LimparTextBox(); // Limpa o TextBox
+            Exibir_Num.Text = resultado.ToString("0"); // Exibe 0 no TextBox
+
+        }
 
         // Método que atualiza as variáveis num1 e num2 com o número 1
-        public void Numero_1_Click(object sender, EventArgs e)
+        private void Numero_1_Click(object sender, EventArgs e)
         {
             LimparTextBox(); // Limpa o TextBox
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
@@ -66,7 +80,7 @@ namespace CalculadoraGrafica
         }
 
         // Método que atualiza as variáveis num1 e num2 com o número 2
-        public void Numero_2_Click(object sender, EventArgs e)
+        private void Numero_2_Click(object sender, EventArgs e)
         {
             LimparTextBox(); // Limpa o TextBox
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
@@ -104,7 +118,7 @@ namespace CalculadoraGrafica
             }
         }
 
-        public void Botao_Soma_Click(object sender, EventArgs e)
+        private void Botao_Soma_Click(object sender, EventArgs e)
         {
             // Captura o valor do primeiro número inserido
             if (double.TryParse(Exibir_Num.Text, out num1))
@@ -117,7 +131,7 @@ namespace CalculadoraGrafica
             }
         }
 
-        public void Exibir_Num_TextChanged(object sender, EventArgs e)
+        private void Exibir_Num_TextChanged(object sender, EventArgs e)
         {
             const int maximo_Caracteres = 10; // Define o número máximo de caracteres
 
@@ -135,17 +149,13 @@ namespace CalculadoraGrafica
                 switch (operador)
                 {
                     case "+":
+
                         resultado = num1 + num2;
                         break;
                     // outras operações aqui...
-
-                    default:
-                        break;
                 }
 
                 Exibir_Num.Text = resultado.ToString();
-                LimparTextBox(); // Limpa o TextBox
-                Exibir_Num.Text = resultado.ToString("0");
             }
             else
             {
@@ -153,6 +163,9 @@ namespace CalculadoraGrafica
             }
         }
 
-        
+        private void Limpar_Tudo_Click(object sender, EventArgs e)
+        {
+            ReiniciarVariáveis(); // Reinicia as variáveis
+        }
     }
 }
