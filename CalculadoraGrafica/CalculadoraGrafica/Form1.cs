@@ -23,13 +23,8 @@ namespace CalculadoraGrafica
         {
             InitializeComponent();
 
-            // Desabilitando o TextBox para edição e seleção
-            Exibir_Num.ReadOnly = true;
-            Exibir_Num.Enabled = false;
-            Exibir_Num.Text = resultado.ToString("0");
+            //Exibir_Num.Text = resultado.ToString("0");
 
-            // Removendo o foco de qualquer controle ao iniciar o formulário
-            this.ActiveControl = null;
         }
 
         // Verifica se a operação foi selecionada
