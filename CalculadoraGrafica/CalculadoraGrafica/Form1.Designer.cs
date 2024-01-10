@@ -43,7 +43,8 @@
             this.Numero_8 = new System.Windows.Forms.Button();
             this.Numero_9 = new System.Windows.Forms.Button();
             this.Numero_0 = new System.Windows.Forms.Button();
-            this.Botao_Ponto = new System.Windows.Forms.Button();
+            this.Botao_Virgula = new System.Windows.Forms.Button();
+            this.Botao_Deletar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Numero_1
@@ -233,25 +234,39 @@
             this.Numero_0.UseVisualStyleBackColor = true;
             this.Numero_0.Click += new System.EventHandler(this.Numero_0_Click);
             // 
-            // Botao_Ponto
+            // Botao_Virgula
             // 
-            this.Botao_Ponto.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Botao_Ponto.Location = new System.Drawing.Point(80, 388);
-            this.Botao_Ponto.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.Botao_Ponto.Name = "Botao_Ponto";
-            this.Botao_Ponto.Size = new System.Drawing.Size(59, 60);
-            this.Botao_Ponto.TabIndex = 15;
-            this.Botao_Ponto.TabStop = false;
-            this.Botao_Ponto.Text = ",";
-            this.Botao_Ponto.UseVisualStyleBackColor = true;
-            this.Botao_Ponto.Click += new System.EventHandler(this.Botao_Ponto_Click);
+            this.Botao_Virgula.Font = new System.Drawing.Font("Mongolian Baiti", 25.92F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Botao_Virgula.Location = new System.Drawing.Point(80, 388);
+            this.Botao_Virgula.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Botao_Virgula.Name = "Botao_Ponto";
+            this.Botao_Virgula.Size = new System.Drawing.Size(59, 60);
+            this.Botao_Virgula.TabIndex = 15;
+            this.Botao_Virgula.TabStop = false;
+            this.Botao_Virgula.Text = ",";
+            this.Botao_Virgula.UseVisualStyleBackColor = true;
+            this.Botao_Virgula.Click += new System.EventHandler(this.Botao_Virgula_Click);
+            // 
+            // Botao_Deletar
+            // 
+            this.Botao_Deletar.Font = new System.Drawing.Font("Mongolian Baiti", 12.096F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Botao_Deletar.Location = new System.Drawing.Point(80, 115);
+            this.Botao_Deletar.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Botao_Deletar.Name = "Botao_Deletar";
+            this.Botao_Deletar.Size = new System.Drawing.Size(59, 60);
+            this.Botao_Deletar.TabIndex = 18;
+            this.Botao_Deletar.TabStop = false;
+            this.Botao_Deletar.Text = "CE";
+            this.Botao_Deletar.UseVisualStyleBackColor = true;
+            this.Botao_Deletar.Click += new System.EventHandler(this.Botao_Deletar_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(432, 452);
-            this.Controls.Add(this.Botao_Ponto);
+            this.ClientSize = new System.Drawing.Size(432, 457);
+            this.Controls.Add(this.Botao_Deletar);
+            this.Controls.Add(this.Botao_Virgula);
             this.Controls.Add(this.Numero_0);
             this.Controls.Add(this.Numero_9);
             this.Controls.Add(this.Numero_8);
@@ -293,7 +308,8 @@
         private System.Windows.Forms.Button Numero_8;
         private System.Windows.Forms.Button Numero_9;
         private System.Windows.Forms.Button Numero_0;
-        private System.Windows.Forms.Button Botao_Ponto;
+        private System.Windows.Forms.Button Botao_Virgula;
+        private System.Windows.Forms.Button Botao_Deletar;
     }
 }
 
