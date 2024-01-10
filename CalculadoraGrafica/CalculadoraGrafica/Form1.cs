@@ -27,6 +27,34 @@ namespace CalculadoraGrafica
 
         }
 
+        // Método que verifica se o botão clicado é um número
+        private bool VerificaClick(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
+            if(botao == Numero_0 || botao == Numero_1 || 
+               botao == Numero_2 || botao == Numero_4 || 
+               botao == Numero_5 || botao == Numero_6 ||
+               botao == Numero_7 || botao == Numero_8 ||
+               botao == Numero_8 || botao == Numero_9)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // Método que exibe uma mensagem de erro no TextBox
+        private async void MensagemErroTextBox()
+        {
+            string mensagem = "ERRO";
+            int tempoEmMiliSegundos = 3000;
+            Exibir_Num.Text = mensagem;
+            await Task.Delay(tempoEmMiliSegundos);
+            ReiniciarVariáveis();
+        }
+
         // Verifica se alguma operação foi selecionada
         private bool VerificaOperacao()
         {
@@ -81,8 +109,9 @@ namespace CalculadoraGrafica
             }
             else
             {
-                MessageBox.Show("Por favor, insira um número válido.");
-                ReiniciarVariáveis();
+                //MessageBox.Show("Por favor, insira um número válido.");
+                MensagemErroTextBox();
+                //ReiniciarVariáveis();
                 return 0;
             }
         }
@@ -126,7 +155,17 @@ namespace CalculadoraGrafica
         // Método que atualiza a variável com a operação de soma
         private void Botao_Soma_Click(object sender, EventArgs e)
         {
-            AlterarOperação("+");
+            DesativarFoco();
+            if (!VerificaClick(sender, e))
+            {
+                //MessageBox.Show("Por favor, insira um número válido.");
+                MensagemErroTextBox();
+                //ReiniciarVariáveis();
+            }
+            else
+            {
+                AlterarOperação("+");
+            }
         }
 
         // Método que verifica se número máximo de caracteres foi excedido
@@ -144,57 +183,69 @@ namespace CalculadoraGrafica
         // Método que realiza as operações
         private void Botao_Igual_Click(object sender, EventArgs e)
         {
-            if(operador == "√")
+            DesativarFoco();
+            if (!VerificaClick(sender, e))
             {
-                num2 = 0;
+                //MessageBox.Show("Por favor, insira um número válido.");
+                MensagemErroTextBox();
+                //ReiniciarVariáveis();
             }
             else
             {
-                num2 = RetornaValorTextBox();
-            }
-            switch (operador)
-            {
-                case "+":
-                    LimparTextBox(); 
-                    resultado = num1 + num2;
-                    break;
-                case "-":
-                    LimparTextBox();
-                    resultado = num1 - num2;
-                    break;
-                case "*":
-                    LimparTextBox();
-                    resultado = num1 * num2;
-                    break;
-                case "/":
-                    LimparTextBox();
-                    if (num2 == 0)
-                    {
+                if (operador == "√")
+                {
+                    num2 = 0;
+                }
+                else
+                {
+                    num2 = RetornaValorTextBox();
+                }
+                switch (operador)
+                {
+                    case "+":
                         LimparTextBox();
-                        MessageBox.Show("Não é possível dividir por zero.");
-                        ReiniciarVariáveis();
-                    }
-                    else
-                    {
-                        resultado = num1 / num2;
-                    }
-                    break;
-                case "√":
-                    LimparTextBox();
-                    resultado = Math.Sqrt(num1);
-                    break;
-                default:
-                    resultado = RetornaValorTextBox(); // Retorna o valor do TextBox
-                    break;
-            }
+                        resultado = num1 + num2;
+                        break;
+                    case "-":
+                        LimparTextBox();
+                        resultado = num1 - num2;
+                        break;
+                    case "*":
+                        LimparTextBox();
+                        resultado = num1 * num2;
+                        break;
+                    case "/":
+                        LimparTextBox();
+                        if (num2 == 0)
+                        {
+                            LimparTextBox();
+                            //MessageBox.Show("Não é possível dividir por zero.");
+                            MensagemErroTextBox();
+                            //ReiniciarVariáveis();
+                        }
+                        else
+                        {
+                            resultado = num1 / num2;
+                        }
+                        break;
+                    case "√":
+                        LimparTextBox();
+                        resultado = Math.Sqrt(num1);
+                        break;
+                    default:
+                        resultado = RetornaValorTextBox(); // Retorna o valor do TextBox
+                        break;
+                }
 
-            Exibir_Num.Text = resultado.ToString();
-            substituirZero = true;
+                Exibir_Num.Text = resultado.ToString();
+                substituirZero = true;
+            }
         }
 
         // Método que limpa o TextBox e reinicia as variáveis
         private void Limpar_Tudo_Click(object sender, EventArgs e)
         {
+            DesativarFoco();
             ReiniciarVariáveis();
         }
         
@@ -237,6 +288,7 @@ namespace CalculadoraGrafica
         // Método que insere o numero 0 no TextBox
         private void Numero_0_Click(object sender, EventArgs e)
         {
+            DesativarFoco();
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
             string texto_Botao = botao.Text; // Captura o texto do botão
             InserirTextBox(texto_Botao); 
@@ -244,6 +296,7 @@ namespace CalculadoraGrafica
 
         private void Botao_Virgula_Click(object sender, EventArgs e)
         {
+            DesativarFoco();
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
             string textoBotao = botao.Text; // Captura o texto do botão
 
@@ -266,6 +319,7 @@ namespace CalculadoraGrafica
 
         private void Botao_Deletar_Click(object sender, EventArgs e)
         {
+            DesativarFoco();
             double valor = RetornaValorTextBox();
             int valor2 = (int)(valor / 10); // Converte o valor double para int
             string texto = valor2.ToString();
@@ -300,22 +354,62 @@ namespace CalculadoraGrafica
 
         private void Botao_Subtrair_Click(object sender, EventArgs e)
         {
-            AlterarOperação("-");
+            DesativarFoco();
+            if (!VerificaClick(sender, e))
+            {
+                //MessageBox.Show("Por favor, insira um número válido.");
+                MensagemErroTextBox();
+                //ReiniciarVariáveis();
+            }
+            else
+            {
+                AlterarOperação("-");
+            }
         }
 
         private void Botao_Multiplicar_Click(object sender, EventArgs e)
         {
-            AlterarOperação("*");
+            DesativarFoco();
+            if (!VerificaClick(sender, e))
+            {
+                //MessageBox.Show("Por favor, insira um número válido.");
+                MensagemErroTextBox();
+                //ReiniciarVariáveis();
+            }
+            else
+            {
+                AlterarOperação("*");
+            }
         }
 
         private void Botao_Dividir_Click(object sender, EventArgs e)
         {
-            AlterarOperação("/");
+            DesativarFoco();
+            if (!VerificaClick(sender, e))
+            {
+                //MessageBox.Show("Por favor, insira um número válido.");
+                MensagemErroTextBox();
+                //ReiniciarVariáveis();
+            }
+            else
+            {
+                AlterarOperação("/");
+            }
         }
 
         private void Botao_Raiz_Click(object sender, EventArgs e)
         {
-            AlterarOperação("√");
+            DesativarFoco();
+            if (!VerificaClick(sender, e))
+            {
+                //MessageBox.Show("Por favor, insira um número válido.");
+                MensagemErroTextBox();
+                //ReiniciarVariáveis();
+            }
+            else
+            {
+                AlterarOperação("√");
+            }
         }
     }
 }
