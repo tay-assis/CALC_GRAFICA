@@ -19,6 +19,7 @@ namespace CalculadoraGrafica
         private string operador = "";
         private double resultado = 0;
         private bool substituirZero = true;
+        private bool textBoxAlterado = false;
 
         // Método construtor
         public Form1()
@@ -31,11 +32,11 @@ namespace CalculadoraGrafica
         private bool VerificaClick(object sender, EventArgs e)
         {
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
-            if(botao == Numero_0 || botao == Numero_1 || 
-               botao == Numero_2 || botao == Numero_4 || 
-               botao == Numero_5 || botao == Numero_6 ||
-               botao == Numero_7 || botao == Numero_8 ||
-               botao == Numero_8 || botao == Numero_9)
+            if(botao == Numero_0 && botao == Numero_1 && 
+               botao == Numero_2 && botao == Numero_4 && 
+               botao == Numero_5 && botao == Numero_6 &&
+               botao == Numero_7 && botao == Numero_8 &&
+               botao == Numero_8 && botao == Numero_9)
             {
                 return true;
             }
@@ -65,6 +66,7 @@ namespace CalculadoraGrafica
         private void InserirTextBox(string texto)
         {
             Exibir_Num.Text += texto;
+            textBoxAlterado = true;
         }
 
         private void AlterarOperação(string operando)
@@ -95,7 +97,8 @@ namespace CalculadoraGrafica
             resultado = 0; 
             substituirZero = true; 
             LimparTextBox(); 
-            Exibir_Num.Text = resultado.ToString("0"); 
+            Exibir_Num.Text = resultado.ToString("0");
+            textBoxAlterado = false;
 
         }
 
@@ -103,8 +106,9 @@ namespace CalculadoraGrafica
         private double RetornaValorTextBox()
         {
             double valor = 0;
-            if(double.TryParse(Exibir_Num.Text, out valor))
+            if(textBoxAlterado == true)
             {
+                double.TryParse(Exibir_Num.Text, out valor);
                 return valor;
             }
             else
@@ -132,6 +136,7 @@ namespace CalculadoraGrafica
             {
                 InserirTextBox(texto_Botao);
             }
+            textBoxAlterado = true;
         }
 
         // Método que adiciona o número 1 no TextBox
@@ -156,7 +161,7 @@ namespace CalculadoraGrafica
         private void Botao_Soma_Click(object sender, EventArgs e)
         {
             DesativarFoco();
-            if (!VerificaClick(sender, e))
+            if (textBoxAlterado == false)
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
@@ -184,7 +189,7 @@ namespace CalculadoraGrafica
         private void Botao_Igual_Click(object sender, EventArgs e)
         {
             DesativarFoco();
-            if (!VerificaClick(sender, e))
+            if (textBoxAlterado == false)
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
@@ -238,7 +243,7 @@ namespace CalculadoraGrafica
                 }
 
                 Exibir_Num.Text = resultado.ToString();
-                substituirZero = true;
+                //substituirZero = true;
             }
         }
 
@@ -289,6 +294,7 @@ namespace CalculadoraGrafica
         private void Numero_0_Click(object sender, EventArgs e)
         {
             DesativarFoco();
+            textBoxAlterado = true;
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
             string texto_Botao = botao.Text; // Captura o texto do botão
             InserirTextBox(texto_Botao); 
@@ -315,6 +321,7 @@ namespace CalculadoraGrafica
                     Exibir_Num.Text += textoBotao; // Adiciona o ponto decimal ao TextBox
                 }
             }
+            textBoxAlterado = true;
         }
 
         private void Botao_Deletar_Click(object sender, EventArgs e)
@@ -348,6 +355,7 @@ namespace CalculadoraGrafica
                 if (texto2 == "0")
                 {
                     substituirZero = true;
+                    textBoxAlterado = false;
                 }
             }
         }
@@ -355,7 +363,7 @@ namespace CalculadoraGrafica
         private void Botao_Subtrair_Click(object sender, EventArgs e)
         {
             DesativarFoco();
-            if (!VerificaClick(sender, e))
+            if (textBoxAlterado == false)
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
@@ -370,7 +378,7 @@ namespace CalculadoraGrafica
         private void Botao_Multiplicar_Click(object sender, EventArgs e)
         {
             DesativarFoco();
-            if (!VerificaClick(sender, e))
+            if (textBoxAlterado == false)
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
@@ -385,7 +393,7 @@ namespace CalculadoraGrafica
         private void Botao_Dividir_Click(object sender, EventArgs e)
         {
             DesativarFoco();
-            if (!VerificaClick(sender, e))
+            if (textBoxAlterado == false)
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
@@ -400,7 +408,7 @@ namespace CalculadoraGrafica
         private void Botao_Raiz_Click(object sender, EventArgs e)
         {
             DesativarFoco();
-            if (!VerificaClick(sender, e))
+            if (textBoxAlterado == false)
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
