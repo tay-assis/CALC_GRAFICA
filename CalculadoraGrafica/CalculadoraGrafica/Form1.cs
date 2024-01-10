@@ -39,6 +39,13 @@ namespace CalculadoraGrafica
             Exibir_Num.Text += texto;
         }
 
+        private void AlterarOperação(string operando)
+        {
+            num1 = RetornaValorTextBox();
+            LimparTextBox();
+            operador = operando;
+        }
+
         // Método que limpa o TextBox
         private void LimparTextBox()
         {
@@ -75,6 +82,7 @@ namespace CalculadoraGrafica
             else
             {
                 MessageBox.Show("Por favor, insira um número válido.");
+                ReiniciarVariáveis();
                 return 0;
             }
         }
@@ -118,9 +126,7 @@ namespace CalculadoraGrafica
         // Método que atualiza a variável com a operação de soma
         private void Botao_Soma_Click(object sender, EventArgs e)
         {
-            num1 = RetornaValorTextBox();
-            LimparTextBox();
-            operador = "+"; // Define a operação como soma
+            AlterarOperação("+");
         }
 
         // Método que verifica se número máximo de caracteres foi excedido
@@ -138,17 +144,48 @@ namespace CalculadoraGrafica
         // Método que realiza as operações
         private void Botao_Igual_Click(object sender, EventArgs e)
         {
-            num2 = RetornaValorTextBox();
+            if(operador == "√")
+            {
+                num2 = 0;
+            }
+            else
+            {
+                num2 = RetornaValorTextBox();
+            }
             switch (operador)
             {
                 case "+":
                     LimparTextBox(); 
                     resultado = num1 + num2;
                     break;
+                case "-":
+                    LimparTextBox();
+                    resultado = num1 - num2;
+                    break;
+                case "*":
+                    LimparTextBox();
+                    resultado = num1 * num2;
+                    break;
+                case "/":
+                    LimparTextBox();
+                    if (num2 == 0)
+                    {
+                        LimparTextBox();
+                        MessageBox.Show("Não é possível dividir por zero.");
+                        ReiniciarVariáveis();
+                    }
+                    else
+                    {
+                        resultado = num1 / num2;
+                    }
+                    break;
+                case "√":
+                    LimparTextBox();
+                    resultado = Math.Sqrt(num1);
+                    break;
                 default:
                     resultado = RetornaValorTextBox(); // Retorna o valor do TextBox
                     break;
-                // outras operações aqui...
             }
 
             Exibir_Num.Text = resultado.ToString();
@@ -259,6 +296,26 @@ namespace CalculadoraGrafica
                     substituirZero = true;
                 }
             }
+        }
+
+        private void Botao_Subtrair_Click(object sender, EventArgs e)
+        {
+            AlterarOperação("-");
+        }
+
+        private void Botao_Multiplicar_Click(object sender, EventArgs e)
+        {
+            AlterarOperação("*");
+        }
+
+        private void Botao_Dividir_Click(object sender, EventArgs e)
+        {
+            AlterarOperação("/");
+        }
+
+        private void Botao_Raiz_Click(object sender, EventArgs e)
+        {
+            AlterarOperação("√");
         }
     }
 }
