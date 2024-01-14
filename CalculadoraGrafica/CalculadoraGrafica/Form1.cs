@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +46,7 @@ namespace CalculadoraGrafica
                 return false;
             }
         }
-
+ 
         // Método que exibe uma mensagem de erro no TextBox
         private async void MensagemErroTextBox()
         {
@@ -69,7 +70,7 @@ namespace CalculadoraGrafica
             textBoxAlterado = true;
         }
 
-        private void AlterarOperação(string operando)
+        private void AlterarOperacao(object sender, EventArgs e, string operando)
         {
             num1 = RetornaValorTextBox();
             LimparTextBox();
@@ -106,7 +107,7 @@ namespace CalculadoraGrafica
         private double RetornaValorTextBox()
         {
             double valor = 0;
-            if(textBoxAlterado == true)
+            if(textBoxAlterado == true )
             {
                 double.TryParse(Exibir_Num.Text, out valor);
                 return valor;
@@ -115,17 +116,16 @@ namespace CalculadoraGrafica
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
-                //ReiniciarVariáveis();
                 return 0;
             }
         }
 
         // Método que atualiza o TextBox
-        private void AtualizaTextBox(object sender, EventArgs e)
+        private void AtualizaTextBox(object sender, EventArgs e, string texto)
         {
             DesativarFoco();
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
-            string texto_Botao = botao.Text; // Captura o texto do botão
+            string texto_Botao = texto; // Captura o texto do botão
 
             if (substituirZero)
             {
@@ -142,19 +142,19 @@ namespace CalculadoraGrafica
         // Método que adiciona o número 1 no TextBox
         private void Numero_1_Click(object sender, EventArgs e)
         {
-            AtualizaTextBox(sender, e);
+            AtualizaTextBox(sender, e, "1");
         }
 
         // Método que adiciona o número 2 no TextBox
         private void Numero_2_Click(object sender, EventArgs e)
         {
-            AtualizaTextBox(sender, e); 
+            AtualizaTextBox(sender, e, "2"); 
         }
 
         // Método que adiciona o número 3 no TextBox
         private void Numero_3_Click(object sender, EventArgs e)
         {
-            AtualizaTextBox(sender, e);
+            AtualizaTextBox(sender, e, "3");
         }
 
         // Método que atualiza a variável com a operação de soma
@@ -165,11 +165,10 @@ namespace CalculadoraGrafica
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
-                //ReiniciarVariáveis();
             }
             else
             {
-                AlterarOperação("+");
+                AlterarOperacao(sender, e, "+");
             }
         }
 
@@ -193,7 +192,6 @@ namespace CalculadoraGrafica
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
-                //ReiniciarVariáveis();
             }
             else
             {
@@ -208,25 +206,19 @@ namespace CalculadoraGrafica
                 switch (operador)
                 {
                     case "+":
-                        LimparTextBox();
                         resultado = num1 + num2;
                         break;
                     case "-":
-                        LimparTextBox();
                         resultado = num1 - num2;
                         break;
                     case "*":
-                        LimparTextBox();
                         resultado = num1 * num2;
                         break;
                     case "/":
-                        LimparTextBox();
                         if (num2 == 0)
                         {
-                            LimparTextBox();
                             //MessageBox.Show("Não é possível dividir por zero.");
                             MensagemErroTextBox();
-                            //ReiniciarVariáveis();
                         }
                         else
                         {
@@ -234,7 +226,6 @@ namespace CalculadoraGrafica
                         }
                         break;
                     case "√":
-                        LimparTextBox();
                         resultado = Math.Sqrt(num1);
                         break;
                     default:
@@ -257,37 +248,37 @@ namespace CalculadoraGrafica
         // Método que insere o número 4 no TextBox
         private void Numero_4_Click(object sender, EventArgs e)
         {
-            AtualizaTextBox(sender, e);
+            AtualizaTextBox(sender, e, "4");
         }
 
         // Método que insere o número 5 no TextBox
         private void Numero_5_Click(object sender, EventArgs e)
         {
-            AtualizaTextBox(sender, e);
+            AtualizaTextBox(sender, e, "5");
         }
 
         // Método que insere o número 6 no TextBox
         private void Numero_6_Click(object sender, EventArgs e)
         {
-            AtualizaTextBox(sender, e);
+            AtualizaTextBox(sender, e, "6");
         }
 
         // Método que insere o número 7 no TextBox
         private void Numero_7_Click(object sender, EventArgs e)
         {
-            AtualizaTextBox(sender, e);
+            AtualizaTextBox(sender, e, "7");
         }
 
         // Método que insere o número 8 no TextBox
         private void Numero_8_Click(object sender, EventArgs e)
         {
-            AtualizaTextBox(sender, e);
+            AtualizaTextBox(sender, e, "8");
         }
 
         // Método que insere o número 9 no TextBox
         private void Numero_9_Click(object sender, EventArgs e)
         {
-            AtualizaTextBox(sender, e);
+            AtualizaTextBox(sender, e, "9");
         }
         
         // Método que insere o numero 0 no TextBox
@@ -296,7 +287,7 @@ namespace CalculadoraGrafica
             DesativarFoco();
             textBoxAlterado = true;
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
-            string texto_Botao = botao.Text; // Captura o texto do botão
+            string texto_Botao = "0";
             InserirTextBox(texto_Botao); 
         }
 
@@ -304,7 +295,7 @@ namespace CalculadoraGrafica
         {
             DesativarFoco();
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
-            string textoBotao = botao.Text; // Captura o texto do botão
+            string textoBotao = ","; // Captura o texto do botão
 
             if (VerificaOperacao())
             {
@@ -367,11 +358,10 @@ namespace CalculadoraGrafica
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
-                //ReiniciarVariáveis();
             }
             else
             {
-                AlterarOperação("-");
+                AlterarOperacao(sender, e, "-");
             }
         }
 
@@ -382,11 +372,10 @@ namespace CalculadoraGrafica
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
-                //ReiniciarVariáveis();
             }
             else
             {
-                AlterarOperação("*");
+                AlterarOperacao(sender, e, "*");
             }
         }
 
@@ -397,11 +386,10 @@ namespace CalculadoraGrafica
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
-                //ReiniciarVariáveis();
             }
             else
             {
-                AlterarOperação("/");
+                AlterarOperacao(sender, e, "/");
             }
         }
 
@@ -412,12 +400,21 @@ namespace CalculadoraGrafica
             {
                 //MessageBox.Show("Por favor, insira um número válido.");
                 MensagemErroTextBox();
-                //ReiniciarVariáveis();
             }
             else
             {
-                AlterarOperação("√");
+                AlterarOperacao(sender, e, "√");
             }
         }
+
+        //private void Form1_Load(object sender, EventArgs e)
+        //{
+            // Carregar a fonte no formulário
+            //string caminhoFonte = Path.Combine(Application.StartupPath, "Fontes", "pixelart.ttf");
+            //FontFamily fonte = new FontFamily(caminhoFonte);
+
+            // Aplicar a fonte ao TextBox (substitua textBox1 pelo nome do seu TextBox)
+            //Exibir_Num.Font = new Font(fonte, 36, FontStyle.Regular);
+        //}
     }
 }
