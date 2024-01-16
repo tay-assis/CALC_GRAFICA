@@ -361,10 +361,10 @@ namespace CalculadoraGrafica
             {
                 Exibir_Num.Text += textoBotao; // Adiciona a vírgula no TextBox
             }
-            else if (!Exibir_Num.Text.Contains("."))
-            {
-                Exibir_Num.Text += textoBotao; // Adiciona o ponto decimal ao TextBox
-            }
+            //else if (!Exibir_Num.Text.Contains("."))
+            //{
+            //    Exibir_Num.Text += textoBotao; // Adiciona o ponto decimal ao TextBox
+            //}
             textBoxAlterado = true;
         }
 
