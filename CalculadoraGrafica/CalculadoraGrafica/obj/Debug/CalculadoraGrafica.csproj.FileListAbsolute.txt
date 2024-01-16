@@ -7,3 +7,4 @@ C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\Calcul
 C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.csproj.CoreCompileInputs.cache
 C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.exe
 C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.pdb
+C:\Users\Thay4\OneDrive\Documentos\GitHub\CALC_GRAFICA\CalculadoraGrafica\CalculadoraGrafica\obj\Debug\CalculadoraGrafica.Form1.resources
