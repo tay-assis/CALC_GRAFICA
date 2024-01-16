@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,9 +16,6 @@ namespace CalculadoraGrafica
     public partial class Form1 : Form
     {
         // Variáveis globais
-        private double num1 = 0;
-        private double num2 = 0;
-        private string operador = "";
         private double resultado = 0;
         private bool substituirZero = true;
         private bool textBoxAlterado = false;
@@ -26,24 +24,41 @@ namespace CalculadoraGrafica
         public Form1()
         {
             InitializeComponent();
+            this.KeyPress += new KeyPressEventHandler(Form1TecladoSelecionado);
 
         }
 
-        // Método que verifica se o botão clicado é um número
-        private bool VerificaClick(object sender, EventArgs e)
+        private void Form1TecladoSelecionado(object sender, KeyPressEventArgs e)
         {
-            System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
-            if(botao == Numero_0 && botao == Numero_1 && 
-               botao == Numero_2 && botao == Numero_4 && 
-               botao == Numero_5 && botao == Numero_6 &&
-               botao == Numero_7 && botao == Numero_8 &&
-               botao == Numero_8 && botao == Numero_9)
+            // Verifica se o botão pressionado é um número
+            if (char.IsDigit(e.KeyChar))
             {
-                return true;
+                // Se for um número, insira no TextBox
+                InserirTextBox(e.KeyChar.ToString());
             }
-            else
+            else if (e.KeyChar == ',')
             {
-                return false;
+                // Se for uma vírgula, insira no TextBox
+                InserirTextBox(",");
+            }
+            else if (e.KeyChar == '+' || e.KeyChar == '-' || e.KeyChar == '*' || e.KeyChar == '/')
+            {
+                // Insere o operador/sinal no TextBox
+                InserirTextBox(e.KeyChar.ToString());
+            }
+            else if (e.KeyChar == (char)Keys.Enter)
+            {
+                // Se for a tecla Enter, realize a operação
+                Botao_Igual_Click(sender, e);
+            }
+            else if (e.KeyChar == (char)Keys.Back)
+            {
+                // Se for a tecla Backspace, remova o último caractere
+                Botao_Deletar_Click(sender, e);
+            }
+            else if (e.KeyChar == '(' || e.KeyChar == ')')
+            {
+                InserirTextBox(e.KeyChar.ToString());
             }
         }
  
@@ -57,24 +72,19 @@ namespace CalculadoraGrafica
             ReiniciarVariáveis();
         }
 
-        // Verifica se alguma operação foi selecionada
-        private bool VerificaOperacao()
-        {
-            return string.IsNullOrEmpty(operador); // Retorna true se a operação não foi selecionada
-        }
-
         // Método que insere o número digitado no TextBox
         private void InserirTextBox(string texto)
         {
-            Exibir_Num.Text += texto;
+            if (substituirZero == true)
+            {
+                Exibir_Num.Text = texto;
+            }
+            else
+            {
+                Exibir_Num.Text += texto;
+            }
+            substituirZero = false;
             textBoxAlterado = true;
-        }
-
-        private void AlterarOperacao(object sender, EventArgs e, string operando)
-        {
-            num1 = RetornaValorTextBox();
-            LimparTextBox();
-            operador = operando;
         }
 
         // Método que limpa o TextBox
@@ -91,33 +101,13 @@ namespace CalculadoraGrafica
         
         // Método que reinicia as variáveis
         private void ReiniciarVariáveis()
-        {
-            num1 = 0; 
-            num2 = 0; 
-            operador = ""; 
+        { 
             resultado = 0; 
             substituirZero = true; 
             LimparTextBox(); 
             Exibir_Num.Text = resultado.ToString("0");
             textBoxAlterado = false;
 
-        }
-
-        // Método que retorna o valor do TextBox convertido para double
-        private double RetornaValorTextBox()
-        {
-            double valor = 0;
-            if(textBoxAlterado == true )
-            {
-                double.TryParse(Exibir_Num.Text, out valor);
-                return valor;
-            }
-            else
-            {
-                //MessageBox.Show("Por favor, insira um número válido.");
-                MensagemErroTextBox();
-                return 0;
-            }
         }
 
         // Método que atualiza o TextBox
@@ -168,14 +158,14 @@ namespace CalculadoraGrafica
             }
             else
             {
-                AlterarOperacao(sender, e, "+");
+                Exibir_Num.Text += "+";
             }
         }
 
         // Método que verifica se número máximo de caracteres foi excedido
         private void Exibir_Num_TextChanged(object sender, EventArgs e)
         {
-            const int maximo_Caracteres = 10; // Define o número máximo de caracteres
+            const int maximo_Caracteres = 20; // Define o número máximo de caracteres
         
             if (Exibir_Num.Text.Length > maximo_Caracteres)
             {
@@ -195,47 +185,112 @@ namespace CalculadoraGrafica
             }
             else
             {
-                if (operador == "√")
+                string expressao = Exibir_Num.Text; // Captura a expressão digitada no TextBox
+                List<double> numeros = new List<double>();
+                List<char> operadores = new List<char>();
+                string numeroAtual = "";
+
+                for (int i = 0; i < expressao.Length; i++)
                 {
-                    num2 = 0;
-                }
-                else
-                {
-                    num2 = RetornaValorTextBox();
-                }
-                switch (operador)
-                {
-                    case "+":
-                        resultado = num1 + num2;
-                        break;
-                    case "-":
-                        resultado = num1 - num2;
-                        break;
-                    case "*":
-                        resultado = num1 * num2;
-                        break;
-                    case "/":
-                        if (num2 == 0)
+                    char caractere = expressao[i];
+
+                    if (char.IsDigit(caractere) || caractere == ',')
+                    {
+                        numeroAtual += caractere;
+                    }
+                    else if (caractere == '-')
+                    {
+                        // Verifica se o "-" é um operador ou parte de um número negativo
+                        if (i == 0 || (!char.IsDigit(expressao[i - 1]) && expressao[i - 1] != ','))
                         {
-                            //MessageBox.Show("Não é possível dividir por zero.");
-                            MensagemErroTextBox();
+                            numeroAtual += caractere; // Considera como parte do número negativo
                         }
                         else
                         {
-                            resultado = num1 / num2;
+                            // É um operador de subtração
+                            AdicionarNumero(numeroAtual, numeros);
+                            numeroAtual = "";
+                            operadores.Add(caractere);
                         }
-                        break;
-                    case "√":
-                        resultado = Math.Sqrt(num1);
-                        break;
-                    default:
-                        resultado = RetornaValorTextBox(); // Retorna o valor do TextBox
-                        break;
+                    }
+                    else if (caractere == '+' || caractere == '*' || caractere == '/')
+                    {
+                        AdicionarNumero(numeroAtual, numeros);
+                        numeroAtual = "";
+                        operadores.Add(caractere);
+                    }
+                    else if (caractere == '√')
+                    {
+                        // Operação de raiz quadrada
+                        AdicionarNumero(numeroAtual, numeros);
+                        numeroAtual = "";
+                        operadores.Add(caractere);
+                    }
                 }
 
+                AdicionarNumero(numeroAtual, numeros);
+
+                double resultado = RealizarOperacoes(numeros, operadores);
                 Exibir_Num.Text = resultado.ToString();
-                //substituirZero = true;
             }
+        }
+
+        private void AdicionarNumero(string numeroAtual, List<double> numeros)
+        {
+            if (numeroAtual != "")
+            {
+                double numero = double.Parse(numeroAtual);
+                numeros.Add(numero);
+            }
+        }
+
+        private double RealizarOperacoes(List<double> numeros, List<char> operadores)
+        {
+            double resultado = 0;
+            int indice = 0;
+
+            while (operadores.Count > 0)
+            {
+                char operador = operadores[0];      
+                if (operador == '√')
+                {
+                    double num1 = numeros[indice];
+                    resultado = Math.Sqrt(num1);
+
+                    // Atualiza a lista de números e remove o operador
+                    numeros[0] = resultado;
+                    numeros.RemoveAt(0);
+                    operadores.RemoveAt(0);
+                }
+                else
+                {
+                    double num1 = numeros[indice];
+                    double num2 = numeros[indice + 1];
+
+                    if (operador == '+')
+                    {
+                        resultado = num1 + num2;
+                    }
+                    else if (operador == '-')
+                    {
+                        resultado = num1 - num2;
+                    }
+                    else if (operador == '*')
+                    {
+                        resultado = num1 * num2;
+                    }
+                    else if (operador == '/')
+                    {
+                        resultado = num1 / num2;
+                    }
+                    
+                    numeros[indice] = resultado;
+                    numeros.RemoveAt(indice + 1);
+                    operadores.RemoveAt(0);
+                }
+            }
+
+            return resultado;
         }
 
         // Método que limpa o TextBox e reinicia as variáveis
@@ -297,20 +352,13 @@ namespace CalculadoraGrafica
             System.Windows.Forms.Button botao = (System.Windows.Forms.Button)sender; // Captura o botão que foi clicado
             string textoBotao = ","; // Captura o texto do botão
 
-            if (VerificaOperacao())
+            if (!Exibir_Num.Text.Contains(","))
             {
-                if (!Exibir_Num.Text.Contains(","))
-                {
-                    Exibir_Num.Text += textoBotao; // Adiciona a vírgula no TextBox
-                }
+                Exibir_Num.Text += textoBotao; // Adiciona a vírgula no TextBox
             }
-            else
+            else if (!Exibir_Num.Text.Contains("."))
             {
-                
-                if (!Exibir_Num.Text.Contains("."))
-                {
-                    Exibir_Num.Text += textoBotao; // Adiciona o ponto decimal ao TextBox
-                }
+                Exibir_Num.Text += textoBotao; // Adiciona o ponto decimal ao TextBox
             }
             textBoxAlterado = true;
         }
@@ -318,37 +366,33 @@ namespace CalculadoraGrafica
         private void Botao_Deletar_Click(object sender, EventArgs e)
         {
             DesativarFoco();
-            double valor = RetornaValorTextBox();
-            int valor2 = (int)(valor / 10); // Converte o valor double para int
-            string texto = valor2.ToString();
+            char[] caracteres = Exibir_Num.Text.ToCharArray(); // Converte o texto do TextBox em um array de caracteres
 
-            if (!Exibir_Num.Text.Contains(","))
-            {
-                if (valor != valor2)
-                {
-                    Exibir_Num.Text = texto;
-                }
-                if (texto == "0")
-                {
-                    substituirZero = true;
-                }
-            }
-            else
-            {
-                valor2 = (int)(valor % 10);  // Converte o resto da divisão para int
-                string texto2 = valor2.ToString(); // Converte o valor int para string
-                
-                if (Exibir_Num.Text.Contains(texto2)) // Verifica se o texto contém o valor ou caracter
-                {
-                    Exibir_Num.Text = Exibir_Num.Text.Remove(Exibir_Num.Text.Length - 1); // Remove o último caracter e diminui o tamanho da string
-                }
+            // Converte o vetor de caracteres para uma lista para facilitar a manipulação
+            List<char> listaDeCaracteres = caracteres.ToList();
 
-                if (texto2 == "0")
-                {
-                    substituirZero = true;
-                    textBoxAlterado = false;
-                }
+            // Verifica se a lista não está vazia antes de tentar remover o último caractere
+            if (listaDeCaracteres.Count > 0)
+            {
+                // Remove o último caractere
+                listaDeCaracteres.RemoveAt(listaDeCaracteres.Count - 1);
+
+                // Converte de volta para um vetor de caracteres
+                caracteres = listaDeCaracteres.ToArray();
             }
+
+            // Converte o vetor de caracteres de volta para uma string
+            string texto = new string(caracteres);
+
+            if (string.IsNullOrEmpty(texto))
+            {
+                substituirZero = true;
+                textBoxAlterado = false;
+                texto = "0";
+            }
+
+            // Exibe o texto no TextBox
+            Exibir_Num.Text = texto;
         }
 
         private void Botao_Subtrair_Click(object sender, EventArgs e)
@@ -361,7 +405,7 @@ namespace CalculadoraGrafica
             }
             else
             {
-                AlterarOperacao(sender, e, "-");
+                Exibir_Num.Text += "-";
             }
         }
 
@@ -375,7 +419,7 @@ namespace CalculadoraGrafica
             }
             else
             {
-                AlterarOperacao(sender, e, "*");
+                Exibir_Num.Text += "*";
             }
         }
 
@@ -389,32 +433,14 @@ namespace CalculadoraGrafica
             }
             else
             {
-                AlterarOperacao(sender, e, "/");
+                Exibir_Num.Text += "/";
             }
         }
 
         private void Botao_Raiz_Click(object sender, EventArgs e)
         {
-            DesativarFoco();
-            if (textBoxAlterado == false)
-            {
-                //MessageBox.Show("Por favor, insira um número válido.");
-                MensagemErroTextBox();
-            }
-            else
-            {
-                AlterarOperacao(sender, e, "√");
-            }
+            Exibir_Num.Text = "√";
+            substituirZero = false;
         }
-
-        //private void Form1_Load(object sender, EventArgs e)
-        //{
-            // Carregar a fonte no formulário
-            //string caminhoFonte = Path.Combine(Application.StartupPath, "Fontes", "pixelart.ttf");
-            //FontFamily fonte = new FontFamily(caminhoFonte);
-
-            // Aplicar a fonte ao TextBox (substitua textBox1 pelo nome do seu TextBox)
-            //Exibir_Num.Font = new Font(fonte, 36, FontStyle.Regular);
-        //}
     }
 }
