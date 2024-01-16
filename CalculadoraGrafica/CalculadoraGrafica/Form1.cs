@@ -28,6 +28,7 @@ namespace CalculadoraGrafica
 
         }
 
+        // Método que faz a leitura do teclado
         private void Form1TecladoSelecionado(object sender, KeyPressEventArgs e)
         {
             // Verifica se o botão pressionado é um número
@@ -147,7 +148,7 @@ namespace CalculadoraGrafica
             AtualizaTextBox(sender, e, "3");
         }
 
-        // Método que atualiza a variável com a operação de soma
+        // Método que adiciona a operação de soma no TextBox
         private void Botao_Soma_Click(object sender, EventArgs e)
         {
             DesativarFoco();
@@ -174,7 +175,7 @@ namespace CalculadoraGrafica
             }
         }
 
-        // Método que realiza as operações
+        // Método que separa os números e operadores e realiza as operações
         private void Botao_Igual_Click(object sender, EventArgs e)
         {
             DesativarFoco();
@@ -185,7 +186,7 @@ namespace CalculadoraGrafica
             }
             else
             {
-                string expressao = Exibir_Num.Text; // Captura a expressão digitada no TextBox
+                string expressao = Exibir_Num.Text;
                 List<double> numeros = new List<double>();
                 List<char> operadores = new List<char>();
                 string numeroAtual = "";
@@ -213,15 +214,8 @@ namespace CalculadoraGrafica
                             operadores.Add(caractere);
                         }
                     }
-                    else if (caractere == '+' || caractere == '*' || caractere == '/')
+                    else if (caractere == '+' || caractere == '*' || caractere == '/' || caractere == '√')
                     {
-                        AdicionarNumero(numeroAtual, numeros);
-                        numeroAtual = "";
-                        operadores.Add(caractere);
-                    }
-                    else if (caractere == '√')
-                    {
-                        // Operação de raiz quadrada
                         AdicionarNumero(numeroAtual, numeros);
                         numeroAtual = "";
                         operadores.Add(caractere);
@@ -235,6 +229,7 @@ namespace CalculadoraGrafica
             }
         }
 
+        // Método que adiciona o número atual na lista de números
         private void AdicionarNumero(string numeroAtual, List<double> numeros)
         {
             if (numeroAtual != "")
@@ -244,6 +239,7 @@ namespace CalculadoraGrafica
             }
         }
 
+        // Método que realiza as operações
         private double RealizarOperacoes(List<double> numeros, List<char> operadores)
         {
             double resultado = 0;
@@ -281,7 +277,15 @@ namespace CalculadoraGrafica
                     }
                     else if (operador == '/')
                     {
-                        resultado = num1 / num2;
+                        if (num2 == 0)
+                        {
+                            MensagemErroTextBox();
+                            resultado = 0;
+                        }
+                        else
+                        {
+                            resultado = num1 / num2;
+                        }
                     }
                     
                     numeros[indice] = resultado;
@@ -346,6 +350,7 @@ namespace CalculadoraGrafica
             InserirTextBox(texto_Botao); 
         }
 
+        // Método que insere a vírgula no TextBox
         private void Botao_Virgula_Click(object sender, EventArgs e)
         {
             DesativarFoco();
@@ -363,6 +368,7 @@ namespace CalculadoraGrafica
             textBoxAlterado = true;
         }
 
+        // Método que deleta o último caractere do TextBox
         private void Botao_Deletar_Click(object sender, EventArgs e)
         {
             DesativarFoco();
@@ -395,20 +401,14 @@ namespace CalculadoraGrafica
             Exibir_Num.Text = texto;
         }
 
+        // Método que insere operador/sinal TextBox
         private void Botao_Subtrair_Click(object sender, EventArgs e)
         {
             DesativarFoco();
-            if (textBoxAlterado == false)
-            {
-                //MessageBox.Show("Por favor, insira um número válido.");
-                MensagemErroTextBox();
-            }
-            else
-            {
-                Exibir_Num.Text += "-";
-            }
+            InserirTextBox("-");
         }
 
+        // Método que insere o operador de multiplicação no TextBox
         private void Botao_Multiplicar_Click(object sender, EventArgs e)
         {
             DesativarFoco();
@@ -423,6 +423,7 @@ namespace CalculadoraGrafica
             }
         }
 
+        // Método que insere o operador de divisão no TextBox
         private void Botao_Dividir_Click(object sender, EventArgs e)
         {
             DesativarFoco();
@@ -437,6 +438,7 @@ namespace CalculadoraGrafica
             }
         }
 
+        // Método que insere o operador de raiz quadrada no TextBox
         private void Botao_Raiz_Click(object sender, EventArgs e)
         {
             Exibir_Num.Text = "√";
