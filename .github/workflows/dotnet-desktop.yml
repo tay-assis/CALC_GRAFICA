@@ -36,7 +36,6 @@ jobs:
 
     - name: Execute unit tests
       run: dotnet test
-      working-directory: ${{ env.Main_Project_Path }}
 
     - name: Restore the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
