@@ -42,6 +42,11 @@ namespace CalculadoraGrafica
                 // Se for uma vírgula, insira no TextBox
                 InserirTextBox(",");
             }
+            else if (e.KeyChar == '.')
+            {
+                // Se for uma ponto, insira no TextBox
+                InserirTextBox(",");
+            }
             else if (e.KeyChar == '+' || e.KeyChar == '-' || e.KeyChar == '*' || e.KeyChar == '/')
             {
                 // Insere o operador/sinal no TextBox
@@ -279,15 +284,15 @@ namespace CalculadoraGrafica
                     {
                         if (num2 == 0)
                         {
+                            MessageBox.Show("Resultado Indefinido!");
                             MensagemErroTextBox();
-                            resultado = 0;
                         }
                         else
                         {
                             resultado = num1 / num2;
                         }
                     }
-                    
+
                     numeros[indice] = resultado;
                     numeros.RemoveAt(indice + 1);
                     operadores.RemoveAt(0);
@@ -361,10 +366,10 @@ namespace CalculadoraGrafica
             {
                 Exibir_Num.Text += textoBotao; // Adiciona a vírgula no TextBox
             }
-            //else if (!Exibir_Num.Text.Contains("."))
-            //{
-            //    Exibir_Num.Text += textoBotao; // Adiciona o ponto decimal ao TextBox
-            //}
+            else if (!Exibir_Num.Text.Contains("."))
+            {
+                Exibir_Num.Text += textoBotao; // Adiciona o ponto decimal ao TextBox
+            }
             textBoxAlterado = true;
         }
 
